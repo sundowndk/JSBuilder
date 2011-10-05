@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSBuilder", "JSBuilder\JSBuilder.csproj", "{AF24B5DE-967A-4069-9B7E-C2D9A87632EA}"
+EndProject
+Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "Packaging", "Packaging\Packaging.mdproj", "{7182D4B3-F912-42BC-87B2-29908571798B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		rsport.dk|Any CPU = rsport.dk|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7182D4B3-F912-42BC-87B2-29908571798B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7182D4B3-F912-42BC-87B2-29908571798B}.Release|x86.ActiveCfg = Release|Any CPU
+		{7182D4B3-F912-42BC-87B2-29908571798B}.rsport.dk|Any CPU.ActiveCfg = rsport.dk|Any CPU
+		{AF24B5DE-967A-4069-9B7E-C2D9A87632EA}.Debug|x86.ActiveCfg = Debug|x86
+		{AF24B5DE-967A-4069-9B7E-C2D9A87632EA}.Debug|x86.Build.0 = Debug|x86
+		{AF24B5DE-967A-4069-9B7E-C2D9A87632EA}.Release|x86.ActiveCfg = Release|x86
+		{AF24B5DE-967A-4069-9B7E-C2D9A87632EA}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = JSBuilder\JSBuilder.csproj
+		version = 1.0
+	EndGlobalSection
+EndGlobal

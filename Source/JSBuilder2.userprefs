@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="JSBuilder2/Main.cs">
+    <Files>
+      <File FileName="JSBuilder2/Main.cs" Line="22" Column="13" />
+      <File FileName="JSBuilder2/Solution.cs" Line="17" Column="1" />
+      <File FileName="JSBuilder2/Project.cs" Line="131" Column="3" />
+      <File FileName="JSBuilder2/Class.cs" Line="129" Column="3" />
+      <File FileName="JSBuilder2/Js.cs" Line="41" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
