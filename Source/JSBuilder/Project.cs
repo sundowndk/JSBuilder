@@ -91,7 +91,14 @@ namespace JSBuilder2
 					
 					if (count < this._classes.Count)
 					{
-						result.Add (tab + "},");
+						if (Depth < 1)
+						{
+							result.Add (tab + "}");
+						}
+						else
+						{							
+							result.Add (tab + "},");
+						}
 						result.Add (string.Empty);
 					}
 					else

@@ -22,6 +22,6 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = JSBuilder\JSBuilder.csproj
-		version = 1.01
+		version = 1.02
 	EndGlobalSection
 EndGlobal
