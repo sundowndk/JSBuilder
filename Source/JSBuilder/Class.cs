@@ -10,6 +10,7 @@ namespace JSBuilder2
 		#region Private Fields
 		private string _name;		
 		private List<Class> _classes;
+		private List<Constructor> _constructors;
 		private List<Js> _jses;
 		#endregion
 		
@@ -30,6 +31,14 @@ namespace JSBuilder2
 			}
 		}
 		
+		public List<Constructor> Constructors
+		{
+			get
+			{
+				return this._constructors;
+			}
+		}
+		
 		public List<Js> Jses
 		{
 			get
@@ -44,6 +53,7 @@ namespace JSBuilder2
 		{
 			this._name = string.Empty;		
 			this._classes = new List<Class> ();
+			this._constructors = new List<Constructor> ();
 			this._jses = new List<Js> ();
 		}
 		#endregion
@@ -99,6 +109,40 @@ namespace JSBuilder2
 			}
 			#endregion			
 			
+			#region CONSTRUCTOR
+			if (this._constructors.Count > 0)
+			{
+				int count = 0;
+				foreach (Constructor constructor_ in this._constructors)
+				{
+					Console.WriteLine ("\t\t\tIncluding constructor '"+ constructor_.Name +"'...");
+					count++;
+											
+					result.Add (tab +"/**");
+					result.Add (tab +"* @constructor");
+					result.Add (tab +"*/");
+					result.Add (tab + constructor_.Name +" : function ("+ constructor_.Variables +")");
+					result.Add (tab +"{");
+					
+					
+					foreach (string line in constructor_.Build (Depth))
+					{
+						result.Add (tab + line);
+					}
+					
+					if (count < this._constructors.Count || this._jses.Count > 0)
+					{
+						result.Add (tab + "},");
+						result.Add (string.Empty);
+					}
+					else
+					{
+						result.Add (tab + "}");									
+					}
+				}
+			}			
+			#endregion
+			
 			#region JS
 			if (this._jses.Count > 0)
 			{
@@ -140,7 +184,13 @@ namespace JSBuilder2
 					{						
 						result._classes.Add (Class.Parse (node.ChildNodes, node.Attributes["name"].Value, Path));
 						break;
-					}					
+					}				
+						
+					case "constructor":
+					{
+						result._constructors.Add (Constructor.Parse (node.ChildNodes, node.Attributes["name"].Value, node.Attributes["variables"].Value, Path));
+						break;
+					}
 					
 					case "js":
 					{

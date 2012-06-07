@@ -9,7 +9,7 @@
     <Packages>
       <Packages>
         <Package name="Tarball">
-          <Builder TargetDirectory="..\..\Packages\" DefaultConfiguration="Release|x86" ctype="TarballDeployTarget">
+          <Builder TargetDirectory="..\..\Packages\" DefaultConfiguration="Release" ctype="TarballDeployTarget">
             <ChildEntries>
               <SolutionItemReference path="..\JSBuilder\JSBuilder.csproj" />
             </ChildEntries>
@@ -18,5 +18,7 @@
         </Package>
       </Packages>
     </Packages>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
   </PropertyGroup>
 </Project>
