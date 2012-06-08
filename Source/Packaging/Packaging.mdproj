@@ -4,12 +4,11 @@
     <ItemType>PackagingProject</ItemType>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7182D4B3-F912-42BC-87B2-29908571798B}</ProjectGuid>
-    <ReleaseVersion>1.02</ReleaseVersion>
+    <ProjectGuid>{98B04186-FFCE-4733-A6CC-1E67E8E4DA92}</ProjectGuid>
     <Packages>
       <Packages>
         <Package name="Tarball">
-          <Builder TargetDirectory="..\..\Packages\" DefaultConfiguration="Release" ctype="TarballDeployTarget">
+          <Builder TargetDirectory="..\..\Source" DefaultConfiguration="Release" ctype="TarballDeployTarget">
             <ChildEntries>
               <SolutionItemReference path="..\JSBuilder\JSBuilder.csproj" />
             </ChildEntries>
@@ -18,7 +17,5 @@
         </Package>
       </Packages>
     </Packages>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
   </PropertyGroup>
 </Project>

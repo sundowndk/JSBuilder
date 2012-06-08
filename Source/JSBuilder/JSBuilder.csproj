@@ -8,13 +8,13 @@
     <ProjectGuid>{AF24B5DE-967A-4069-9B7E-C2D9A87632EA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>JSBuilder2</RootNamespace>
-    <AssemblyName>JSBuilder</AssemblyName>
-    <ReleaseVersion>1.02</ReleaseVersion>
+    <AssemblyName>jsbuilder</AssemblyName>
+    <ReleaseVersion>1.03</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Binary\Release\</OutputPath>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

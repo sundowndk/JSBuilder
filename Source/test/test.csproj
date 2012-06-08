@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>test</RootNamespace>
     <AssemblyName>test</AssemblyName>
-    <ReleaseVersion>1.02</ReleaseVersion>
+    <ReleaseVersion>1.03</ReleaseVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|x86' ">
@@ -39,6 +39,18 @@
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Test</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
