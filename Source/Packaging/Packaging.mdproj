@@ -8,7 +8,7 @@
     <Packages>
       <Packages>
         <Package name="Tarball">
-          <Builder TargetDirectory="..\..\Source" DefaultConfiguration="Release" ctype="TarballDeployTarget">
+          <Builder TargetDirectory=".." DefaultConfiguration="Release" ctype="TarballDeployTarget">
             <ChildEntries>
               <SolutionItemReference path="..\JSBuilder\JSBuilder.csproj" />
             </ChildEntries>
@@ -17,5 +17,6 @@
         </Package>
       </Packages>
     </Packages>
+    <ReleaseVersion>1.04</ReleaseVersion>
   </PropertyGroup>
 </Project>

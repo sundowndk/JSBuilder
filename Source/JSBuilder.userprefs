@@ -5,7 +5,7 @@
       <File FileName="JSBuilder/Main.cs" Line="33" Column="24" />
       <File FileName="JSBuilder/Solution.cs" Line="58" Column="66" />
       <File FileName="JSBuilder/Constructor.cs" Line="69" Column="6" />
-      <File FileName="JSBuilder/Class.cs" Line="50" Column="3" />
+      <File FileName="JSBuilder/Class.cs" Line="78" Column="44" />
       <File FileName="test/Main.cs" Line="16" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

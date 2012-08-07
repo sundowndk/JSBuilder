@@ -30,6 +30,6 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = test\test.csproj
-		version = 1.03
+		version = 1.04
 	EndGlobalSection
 EndGlobal

@@ -5,14 +5,15 @@ using System.Collections.Generic;
 
 namespace JSBuilder2
 {
-	public class Project
-	{
+	public class Class
+	{		
 		#region Private Fields
 		private string _name;		
 		private List<Class> _classes;
+		private List<Constructor> _constructors;
 		private List<Js> _jses;
 		#endregion
-
+		
 		#region Public Fields
 		public string Name
 		{
@@ -30,20 +31,29 @@ namespace JSBuilder2
 			}
 		}
 		
+		public List<Constructor> Constructors
+		{
+			get
+			{
+				return this._constructors;
+			}
+		}
+		
 		public List<Js> Jses
 		{
 			get
 			{
 				return this._jses;
 			}
-		}		
+		}
 		#endregion
 		
 		#region Constructor
-		private Project ()
+		private Class ()
 		{
-			this._name = string.Empty;						
+			this._name = string.Empty;		
 			this._classes = new List<Class> ();
+			this._constructors = new List<Constructor> ();
 			this._jses = new List<Js> ();
 		}
 		#endregion
@@ -51,15 +61,14 @@ namespace JSBuilder2
 		#region Public Methods
 		public List<string> Build (int Depth)
 		{
-			Console.WriteLine ("\tBuilding project '"+ this._name +"'");			
-			List<string> result = new List<string> (); 	
+			List<string> result = new List<string> ();
 			
 			#region TAB
 			string tab = string.Empty;
 			for (int i = 0; i < Depth; i++) 
 			{
 				tab += "\t";
-			}
+			}		
 			#endregion
 			
 			#region CLASS
@@ -68,70 +77,103 @@ namespace JSBuilder2
 				int count = 0;
 				foreach (Class class_ in this._classes)
 				{
-					Console.WriteLine ("\t\tIncluding class '"+ class_.Name +"'...");
+					Console.WriteLine ("\t\t\tIncluding class '"+ class_.Name +"'...");
 					count++;
 											
 					result.Add (tab +"// ---------------------------------------------------------------------------------------------------------------");
 					result.Add (tab +"// CLASS: "+ class_.Name);
 					result.Add (tab +"// ---------------------------------------------------------------------------------------------------------------");
-					if (Depth < 1)
-					{
-						result.Add (tab + "var "+ class_.Name +" =");
-					}
-					else
-					{
-						result.Add (tab + class_.Name +" :");
-					}
+					result.Add (tab + class_.Name +" :");
 					result.Add (tab + "{");
 					
-					foreach (string line in class_.Build (Depth + 1))
+					foreach (string line in class_.Build (Depth))
 					{
 						result.Add (tab + line);
 					}
 					
-					if (count < this._classes.Count)
+					if (count < this._classes.Count || this._jses.Count > 0 || this._constructors.Count > 0)
 					{
 						result.Add (tab + "},");
 						result.Add (string.Empty);
 					}
 					else
 					{
-						result.Add (tab + "}");	
+						result.Add (tab + "}");			
 						
-						if (this._jses.Count > 0)
-						{
-							result.Add (string.Empty);
-						}
+//						if (this._jses.Count > 0)
+//						{
+//							result.Add (string.Empty);
+//						}						
 					}
 				}
 			}
+			#endregion			
+			
+			#region CONSTRUCTOR
+			if (this._constructors.Count > 0)
+			{
+				int count = 0;
+				foreach (Constructor constructor_ in this._constructors)
+				{
+					Console.WriteLine ("\t\t\tIncluding constructor '"+ constructor_.Name +"'...");
+					count++;
+											
+					result.Add (tab +"/**");
+					result.Add (tab +"* @constructor");
+					result.Add (tab +"*/");
+					result.Add (tab + constructor_.Name +" : function ("+ constructor_.Variables +")");
+					result.Add (tab +"{");
+					
+					
+					foreach (string line in constructor_.Build (Depth))
+					{
+						result.Add (tab + line);
+					}
+					
+					if (count < this._constructors.Count || this._jses.Count > 0)
+					{
+						result.Add (tab + "},");
+						result.Add (string.Empty);
+					}
+					else
+					{
+						result.Add (tab + "}");									
+					}
+				}
+			}			
 			#endregion
 			
 			#region JS
 			if (this._jses.Count > 0)
 			{
-				Console.WriteLine ("\t\t\tIncluding js");
-												
+				int count = 0;
 				foreach (Js js in this._jses)
 				{
-					Console.WriteLine ("\t\t\t\t'"+ js.Name +"'...");				
-					
+					Console.WriteLine ("\t\t\t\t'"+ js.Name +"'...");			
+					count++;
+								
 					foreach (string line in js.Build ())
 					{
-						result.Add (tab + line);
+						result.Add (tab + line);	
+					}				
+						
+					if (count < this._jses.Count)
+					{
+						result[result.Count - 1] += ","; 
+						result.Add (string.Empty);
 					}
-				}		
+				}
 			}
 			#endregion
-							
+			
 			return result;
 		}
 		#endregion
 		
 		#region Public Static Methods
-		public static Project Parse (XmlNodeList Nodes, string Name, string Path)
+		public static Class Parse (XmlNodeList Nodes, string Name, string Path)
 		{
-			Project result = new Project ();			
+			Class result = new Class ();
 			result._name = Name;
 			
 			foreach (XmlNode node in Nodes)
@@ -141,20 +183,25 @@ namespace JSBuilder2
 					case "class":
 					{						
 						result._classes.Add (Class.Parse (node.ChildNodes, node.Attributes["name"].Value, Path));
-					
+						break;
+					}				
+						
+					case "constructor":
+					{
+						result._constructors.Add (Constructor.Parse (node.ChildNodes, node.Attributes["name"].Value, node.Attributes["variables"].Value, Path));
 						break;
 					}
-						
+					
 					case "js":
 					{
 						result._jses.Add (Js.Load (System.IO.Path.GetDirectoryName (Path) +"/"+ node.Attributes["file"].Value));
 						break;
-					}							
+					}
 				}
 			}
 			
 			return result;
-		}
+		}		
 		#endregion
 	}
 }

@@ -91,7 +91,7 @@ namespace JSBuilder2
 						result.Add (tab + line);
 					}
 					
-					if (count < this._classes.Count || this._jses.Count > 0)
+					if (count < this._classes.Count || this._jses.Count > 0 || this._constructors.Count > 0)
 					{
 						result.Add (tab + "},");
 						result.Add (string.Empty);
