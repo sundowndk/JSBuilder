@@ -11,6 +11,7 @@ namespace JSBuilder2
 		#region Private Fields
 		private string _name;
 		private string _path;
+		private bool _buildjsm;
 		private string _outputdirectory;
 		private List<Project> _projects;
 		#endregion
@@ -21,6 +22,14 @@ namespace JSBuilder2
 			get
 			{
 				return this._name;
+			}
+		}
+
+		public bool BuildJSM
+		{
+			get
+			{
+				return this._buildjsm;
 			}
 		}
 		
@@ -45,6 +54,7 @@ namespace JSBuilder2
 		private Solution ()
 		{
 			this._name = string.Empty;
+			this._buildjsm = false;
 			this._outputdirectory = string.Empty;			
 			this._projects = new List<Project> ();			
 		}	
@@ -84,7 +94,25 @@ namespace JSBuilder2
 					
 					Console.WriteLine (string.Empty);
 					Console.WriteLine ("Writing '"+ this._outputdirectory + project.Name +".js' ...");			
-					Toolbox.IO.WriteTextFile (this._outputdirectory + project.Name +".js", result, Encoding.UTF8);
+					Toolbox.IO.WriteTextFile (this._outputdirectory + project.Name +".js", result, Encoding.ASCII);
+
+//					TextWriter textfile = new StreamWriter (this._outputdirectory + project.Name +".js", false, Encoding.ASCII);
+//					foreach (string line in result)
+//					{
+//						textfile.WriteLine (line);
+//					}
+//					textfile.Close ();
+//					textfile.Dispose ();
+
+
+					if (this._buildjsm)
+					{
+						result.Insert (0, "var EXPORTED_SYMBOLS = [\""+ project.Name +"\"];");
+
+						Console.WriteLine (string.Empty);
+						Console.WriteLine ("Writing '"+ this._outputdirectory + project.Name +".jsm' ...");			
+						Toolbox.IO.WriteTextFile (this._outputdirectory + project.Name +".jsm", result, Encoding.ASCII);
+					}
 				}
 			}
 			#endregion
@@ -104,6 +132,14 @@ namespace JSBuilder2
 			
 			result._name = root.Attributes["name"].Value;				
 			result._outputdirectory = root.Attributes["outputdirectory"].Value;
+
+			if (root.HasAttribute ("buildjsm"))
+			{
+				if (root.Attributes["buildjsm"].Value == "true")
+				{
+					result._buildjsm = true;
+				}
+			}
 			
 			if (!System.IO.Path.IsPathRooted (result._outputdirectory))
 			{
